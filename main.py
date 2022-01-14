@@ -30,23 +30,33 @@ spawn_car_timer = 5
 
 game_is_on = True
 while game_is_on:
-    time.sleep(0.001)
+    time.sleep(scoreboard.move_speed)
+
     for x in car_list:
         x.move_left()
+        if x.xcor() < -340:
+            x.reset_position()
 
-    screen.update()
-
-    if spawn_car_timer <= 0:
-        for i in range(0, (scoreboard.level + 1) * 3):
-            new_car = CarManager()
-            car_list.append(new_car)
-            spawn_car_timer = 10
+    for x in car_list:
+        if terry.distance(x.xcor() + 20, x.ycor()) < 20 or terry.distance(x.xcor() - 20, x.ycor()) < 20:
+            game_is_on = False
+            scoreboard.game_over()
 
     spawn_car_timer -= 1
 
     if terry.ycor() >= 300:
         scoreboard.next_level()
         terry.reset_position()
+
+    if spawn_car_timer <= 0 and len(car_list) < 25:
+        new_car = CarManager()
+        car_list.append(new_car)
+        spawn_car_timer = 5
+
+    screen.update()
+
+    print(len(car_list))
+    print(f"move speed {scoreboard.move_speed}")
 
 
 screen.exitonclick()

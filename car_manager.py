@@ -10,6 +10,7 @@ class CarManager(Turtle):
     def __init__(self):
         super().__init__()
         self.hideturtle()
+        self.speed("fastest")
         self.shape("square")
         self.penup()
         self.generate_car()
@@ -20,8 +21,10 @@ class CarManager(Turtle):
         self.goto(new_x, self.ycor())
 
     def generate_car(self):
+        x_start = random.randint(340, 400)
+        y_start = random.randint(-230, 230)
         self.color(random.choice(COLORS))
-        self.goto(random.randint(340, 400), random.randint(-230, 230))
+        self.goto(x_start, y_start)
         self.showturtle()
 
     def starting_cars(self):
@@ -30,5 +33,8 @@ class CarManager(Turtle):
         self.showturtle()
 
     def destroy_car(self):
-        if self.xcor() < - 340:
-            self.clear()
+        self.clear()
+
+    def reset_position(self):
+        self.hideturtle()
+        self.generate_car()
