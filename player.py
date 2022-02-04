@@ -15,10 +15,10 @@ class Player(Turtle):
         self.reset_position()
 
     def move(self):
-        self.forward(20)
+        self.forward(MOVE_DISTANCE)
 
     def reset_position(self):
         self.hideturtle()
-        self.goto(0, -280)
+        self.goto(STARTING_POSITION)
         self.showturtle()
 

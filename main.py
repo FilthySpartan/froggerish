@@ -1,5 +1,4 @@
 import time
-import random
 from turtle import Screen
 from player import Player
 from car_manager import CarManager
@@ -18,6 +17,7 @@ screen.listen()
 screen.onkeypress(terry.move, "Up")
 scoreboard.update_scoreboard()
 
+# spawns starting cars across the screen
 for i in range(0, 15):
     new_car = CarManager()
     new_car.starting_cars()
